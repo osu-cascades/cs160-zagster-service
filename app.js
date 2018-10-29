@@ -11,7 +11,7 @@ const pool = new Pool({
   connectionString: DATABASE_URL,
 })
 
-pool.query('SELECT NOW()', (err, res) => {
+pool.query('SELECT * FROM rides LIMIT 1', (err, res) => {
   console.log(err, res)
   pool.end()
 })
