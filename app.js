@@ -16,6 +16,17 @@ app.get('/zagster', (request, response) => {
   })
 })
 
+app.get('/rides/count', (request, response) => {
+  const pool = new Pool({
+    connectionString: DATABASE_URL,
+  })
+
+  pool.query('SELECT COUNT(*) FROM rides', (err, results) => {
+    response.send(results.rows[0])
+    pool.end()
+  })
+})
+
 app.get('/', (request, response) => {
   response.send('I am listening!')
 })
