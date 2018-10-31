@@ -5,17 +5,6 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const DATABASE_URL = process.env.DATABASE_URL || "UNDEFINED"
 
-app.get('/zagster', (request, response) => {
-  const pool = new Pool({
-    connectionString: DATABASE_URL,
-  })
-
-  pool.query('SELECT * FROM rides LIMIT 1', (err, results) => {
-    response.send(results.rows[0])
-    pool.end()
-  })
-})
-
 app.get('/rides/count', (request, response) => {
   const pool = new Pool({
     connectionString: DATABASE_URL,
@@ -29,6 +18,17 @@ app.get('/rides/count', (request, response) => {
 
 app.get('/', (request, response) => {
   response.send('I am listening!')
+})
+
+app.get('/zagster', (request, response) => {
+  const pool = new Pool({
+    connectionString: DATABASE_URL,
+  })
+
+  pool.query('SELECT * FROM rides LIMIT 1', (err, results) => {
+    response.send(results.rows[0])
+    pool.end()
+  })
 })
 
 app.get('/ice_cream', (request,response) => response.send("Mint ice cream"))
