@@ -17,7 +17,7 @@ Run the server with `node app.js`.
 
 ## Route Handlers
 
-path|result|description
+path|description|result
 ---|---|---
 /zagster |A sample route to return one row of data.| `{"id":1,"user_id":"","rental_id":"","start_lat":44.0,"start_lon":-121.3,"end_lat":44.0,"end_lon":-121.3,"start_time":"","end_time":"","membership":""}`
 /rides/count | Total number of rows in the _rides_ table.| `{"count":"8675309"}`
