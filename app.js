@@ -22,6 +22,22 @@ app.get('/rides/count', (request, response) => {
   })
 })
 
+app.get('/rides/count/by_month', (request, response) => {
+  const pool = new Pool({
+    connectionString: DATABASE_URL
+  })
+  pool.query(`SELECT extract(month from start_time) as month,
+              extract(year from start_time) as year,
+              count(*) as count
+              from rides
+              group by 1, 2
+              order by year, month`, (err, results) => {
+    response.send(results.rows)
+    pool.end()
+  })
+})
+
+
 app.get('/', (request, response) => {
   response.send('I am listening!')
 })
