@@ -4,6 +4,7 @@ const { Pool } = require('pg')
 const app = express()
 const PORT = process.env.PORT || 3000
 const DATABASE_URL = process.env.DATABASE_URL || "UNDEFINED"
+const pool = new Pool({connectionString: DATABASE_URL})
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -12,47 +13,28 @@ app.use(function(req, res, next) {
 });
 
 app.get('/rides/count', (request, response) => {
-  const pool = new Pool({
-    connectionString: DATABASE_URL,
-  })
-
-  pool.query('SELECT COUNT(*) FROM rides', (err, results) => {
-    response.send(results.rows[0])
-    pool.end()
-  })
+  const SQL = "SELECT COUNT(*) FROM rides;"
+  pool.query(SQL, (err, results) => response.send(results.rows[0]))
 })
 
 app.get('/rides/count/by_month', (request, response) => {
-  const pool = new Pool({
-    connectionString: DATABASE_URL
-  })
-  pool.query(`SELECT extract(month from start_time) as month,
-              extract(year from start_time) as year,
-              count(*) as count
-              from rides
-              group by 1, 2
-              order by year, month`, (err, results) => {
+  const SQL = `SELECT extract(month from start_time) as month,
+               extract(year from start_time) as year,
+               COUNT(*) as count
+               FROM rides
+               GROUP BY year, month
+               ORDER BY year, month;`
+  pool.query(SQL, (err, results) => {
     response.send(results.rows)
-    pool.end()
   })
-})
-
-
-app.get('/', (request, response) => {
-  response.send('I am listening!')
 })
 
 app.get('/zagster', (request, response) => {
-  const pool = new Pool({
-    connectionString: DATABASE_URL,
-  })
-
-  pool.query('SELECT * FROM rides LIMIT 1', (err, results) => {
-    response.send(results.rows[0])
-    pool.end()
-  })
+  const SQL = "SELECT * FROM rides LIMIT 1;"
+  pool.query(SQL, (err, results) => response.send(results.rows[0]))
 })
 
+app.get('/', (request, response) => { response.send('I am listening!') })
 app.get('/ice_cream', (request,response) => response.send("Mint ice cream"))
 app.get('/RKS', (request, response) => response.send("MintBerryCrunch"))
 app.get('/HemenwayThanksgiving', (request, response) => response.send("SweetPotato"))
