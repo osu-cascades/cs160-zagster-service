@@ -5,6 +5,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const DATABASE_URL = process.env.DATABASE_URL || "UNDEFINED"
 const pool = new Pool({connectionString: DATABASE_URL})
+const Transformer = require('./transformer')
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,7 +26,8 @@ app.get('/rides/count/by_month', (request, response) => {
                GROUP BY year, month
                ORDER BY year, month;`
   pool.query(SQL, (err, results) => {
-    response.send(results.rows)
+    console.log(results.rows)
+    response.send(Transformer.count_by_year_and_month(results.rows))
   })
 })
 
