@@ -1,21 +1,13 @@
 # Zagster Service
 
-A web service API endpoint for Zagster bike share data.
+A web service API providing Zagster bike share data from Bend, OR.
 
-## Development
+## Usage
 
-To get this up and running in your development environment:
+Consume the data provided by this web service via the production URL, followed
+by the paths listed here in the "Web Service API Endpoints" table.
 
-You'll need a Postgres server running, and will probably want to use PGAdmin to manage your server.
-Create a database, add a table with the appropriate schema, and use PGAdmin to import the CSV data into the table.
-
-Install the dependencies with `npm install`.
-
-Copy `.env.example` to `.env` and set the appropriate environment vars.
-
-Run the server with `node app.js`.
-
-## Route Handlers
+## Web Service API Endpoints
 
 path|description|result
 ---|---|---
@@ -50,4 +42,4 @@ path|description|result
 [/manbearpig](https://zagster-service.herokuapp.com/manbearpig)|A practice route.|_word or phrase_
 [/totallysecurechanneladminonly](https://zagster-service.herokuapp.com/totallysecurechanneladminonly)|A practice route.|_word or phrase_
 
-(c) 2018 The OSU Cascades CS 160 Mob
+(c) 2018 Yong Bakos and the OSU Cascades CS 160 Mob. All right reserved.
