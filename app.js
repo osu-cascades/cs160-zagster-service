@@ -19,12 +19,13 @@ app.get('/rides/count', (request, response) => {
 })
 
 app.get('/rides/count/by_month', (request, response) => {
-  const SQL = `SELECT extract(month from start_time) as month,
-               extract(year from start_time) as year,
-               COUNT(*) as count
-               FROM rides
-               GROUP BY year, month
-               ORDER BY year, month;`
+  const SQL =
+    `SELECT extract(month from start_time) as month,
+     extract(year from start_time) as year,
+     COUNT(*) as count
+     FROM rides
+     GROUP BY year, month
+     ORDER BY year, month;`
   pool.query(SQL, (err, results) => {
     console.log(results.rows)
     response.send(Transformer.count_by_year_and_month(results.rows))
