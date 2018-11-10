@@ -10,7 +10,15 @@ class Transformer {
   //   2002: [ {1: 100}, {2: 90}, ... {12: 78} ]
   // }
   static count_by_year_and_month(rows) {
-    return ''
+    let result = {}
+    let years = new Set(rows.map(row => row.year)); years.delete(null);
+    years.forEach(year => result[year] = [])
+    rows.forEach(row => {
+      if (row.year != null) {
+        result[row.year].push({[row.month]:parseInt(row.count)})
+      }
+    })
+    return result
   }
 
 }
