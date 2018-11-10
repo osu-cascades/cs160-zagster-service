@@ -31,6 +31,18 @@ app.get('/rides/count/by_month', (request, response) => {
   })
 })
 
+app.get('/rides/count/by_hour', (request, response) => {
+  const SQL =
+    `SELECT date_part('hour', start_time) as hour, COUNT(*) as count
+     FROM rides
+     GROUP BY date_part('hour', start_time)
+     ORDER BY hour`
+  pool.query(SQL, (err, results) => {
+    console.log(results.rows)
+    response.send(Transformer.count_by_hour(results.rows))
+  })
+})
+
 app.get('/zagster', (request, response) => {
   const SQL = "SELECT * FROM rides LIMIT 1;"
   pool.query(SQL, (err, results) => response.send(results.rows[0]))

@@ -21,6 +21,17 @@ class Transformer {
     return result
   }
 
+  // { 0: 12, 1: 24, ... 23: 788 }
+  static count_by_hour(rows) {
+    let result = {}
+    rows.forEach(row => {
+      if (row.hour != null) {
+        result[row.hour] = parseInt(row.count)
+      }
+    })
+    return result
+  }
+
 }
 
 module.exports = Transformer;

@@ -17,3 +17,13 @@ test('count_by_year_and_month', () => {
     {2001:[{1:20011},{2:20012}], 2002:[{1:20021},{2:20022}], 2003:[{7:20037}]}
   expect(Transformer.count_by_year_and_month(rows)).toEqual(expected_result)
 });
+
+test('count_by_hour', () => {
+  const rows =
+    [{"hour":0,"count":"429"},
+     {"hour":1,"count":"231"},
+     {"hour":23,"count":"710"},
+     {"hour":null,"count":"183"}]
+  const expected_result = {'0': 429, '1':231, '23':710}
+  expect(Transformer.count_by_hour(rows)).toEqual(expected_result)
+})
