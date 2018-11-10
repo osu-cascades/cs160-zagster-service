@@ -4,7 +4,8 @@
   "description": "A web service API endpoint for Zagster bike share data.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "",
   "license": "ISC",
