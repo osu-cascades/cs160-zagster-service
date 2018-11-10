@@ -27,7 +27,6 @@ app.get('/rides/count/by_month', (request, response) => {
      GROUP BY year, month
      ORDER BY year, month;`
   pool.query(SQL, (err, results) => {
-    console.log(results.rows)
     response.send(Transformer.count_by_year_and_month(results.rows))
   })
 })
