@@ -11,12 +11,12 @@ class Transformer {
   // }
   static count_by_year_and_month(rows) {
     let result = {}
-    let years = new Set(rows.map(row => row.year)); years.delete(null);
-    years.forEach(year => result[year] = [])
+    rows.map(row => row.year).filter(val => val != null).forEach(year => {
+      if (result[year] === undefined) result[year] = []
+    })
     rows.forEach(row => {
-      if (row.year != null) {
+      if (row.year != null)
         result[row.year].push({[row.month]:parseInt(row.count)})
-      }
     })
     return result
   }
