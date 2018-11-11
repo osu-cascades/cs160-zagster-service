@@ -25,9 +25,7 @@ class Transformer {
   static count_by_hour(rows) {
     let result = {}
     rows.forEach(row => {
-      if (row.hour != null) {
-        result[row.hour] = parseInt(row.count)
-      }
+      if (row.hour != null) result[row.hour] = parseInt(row.count)
     })
     return result
   }
