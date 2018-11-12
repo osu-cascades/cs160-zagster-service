@@ -7,6 +7,8 @@ const DATABASE_URL = process.env.DATABASE_URL || "UNDEFINED"
 const pool = new Pool({connectionString: DATABASE_URL})
 const Transformer = require('./transformer')
 
+const STATIONS = require('./stations')
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
