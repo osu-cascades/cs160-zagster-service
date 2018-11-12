@@ -20,7 +20,7 @@ app.get('/rides/count', (request, response) => {
   pool.query(SQL, (err, results) => response.send(results.rows[0]))
 })
 
-app.get('/rides/count/by_month', (request, response) => {
+app.get('/rides/count/per_month', (request, response) => {
   const SQL =
     `SELECT extract(month from start_time) as month,
      extract(year from start_time) as year,
@@ -33,7 +33,7 @@ app.get('/rides/count/by_month', (request, response) => {
   })
 })
 
-app.get('/rides/count/by_hour', (request, response) => {
+app.get('/rides/count/per_hour', (request, response) => {
   const SQL =
     `SELECT date_part('hour', start_time) as hour, COUNT(*) as count
      FROM rides
