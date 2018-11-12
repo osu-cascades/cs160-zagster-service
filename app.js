@@ -56,6 +56,22 @@ app.get('/rides/count/:station', (request, response) => {
   })
 })
 
+app.get('/rides/count/:station/per_month', (request, response) => {
+  if (STATIONS[request.params.station] === undefined) { response.send(404); return }
+  const latitude_range = STATIONS[request.params.station].latitude_range
+  const longitude_range = STATIONS[request.params.station].longitude_range
+
+  response.send(`TODO ${request.params.station}`)
+})
+
+app.get('/rides/count/:station/per_day', (request, response) => {
+  if (STATIONS[request.params.station] === undefined) { response.send(404); return }
+  const latitude_range = STATIONS[request.params.station].latitude_range
+  const longitude_range = STATIONS[request.params.station].longitude_range
+
+  response.send(`TODO ${request.params.station}`)
+})
+
 app.get('/zagster', (request, response) => {
   const SQL = "SELECT * FROM rides LIMIT 1;"
   pool.query(SQL, (err, results) => response.send(results.rows[0]))
