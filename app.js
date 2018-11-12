@@ -40,8 +40,19 @@ app.get('/rides/count/by_hour', (request, response) => {
      GROUP BY date_part('hour', start_time)
      ORDER BY hour`
   pool.query(SQL, (err, results) => {
-    console.log(results.rows)
     response.send(Transformer.count_by_hour(results.rows))
+  })
+})
+
+app.get('/rides/count/:station', (request, response) => {
+  if (STATIONS[request.params.station] === undefined) { response.send(404); return }
+  const lat_range = STATIONS[request.params.station].latitude_range
+  const lon_range = STATIONS[request.params.station].longitude_range
+  const SQL =
+    `SELECT COUNT(*) FROM rides
+     WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4`
+  pool.query(SQL, [lat_range.min, lat_range.max, lon_range.min, lon_range.max], (err, results) => {
+    response.send(results.rows[0])
   })
 })
 
