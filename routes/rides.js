@@ -2,7 +2,7 @@ const express = require('express');
 const rides = express.Router();
 
 const { Pool } = require('pg');
-const DATABASE_URL = process.env.DATABASE_URL || "UNDEFINED";
+const DATABASE_URL = process.env.DATABASE_URL || 'UNDEFINED';
 const pool = new Pool({connectionString: DATABASE_URL});
 
 const Transformer = require('../transformer');
@@ -10,12 +10,12 @@ const STATIONS = require('../stations');
 
 
 rides.get('/example', (req, res) => {
-  const SQL = "SELECT * FROM rides LIMIT 1;";
+  const SQL = 'SELECT * FROM rides LIMIT 1;';
   pool.query(SQL, (err, results) => res.send(results.rows[0]));
 });
 
 rides.get('/count', (req, res) => {
-  const SQL = "SELECT COUNT(*) FROM rides;";
+  const SQL = 'SELECT COUNT(*) FROM rides;';
   pool.query(SQL, (err, results) => res.send(results.rows[0]));
 });
 
