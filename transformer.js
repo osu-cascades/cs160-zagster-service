@@ -21,6 +21,15 @@ class Transformer {
     return result;
   }
 
+  // {2001:20011, 2002:20021, 2003:20037};
+  static count_by_year(rows) {
+    let result = {};
+    rows.forEach(row => {
+      if (row.year != null) result[row.year] = parseInt(row.count);
+    });
+    return result;
+  }
+
   // { 0: 12, 1: 24, ... 23: 788 }
   static count_by_hour(rows) {
     let result = {};

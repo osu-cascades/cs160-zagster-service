@@ -32,6 +32,18 @@ rides.get('/count/per_month', (req, res) => {
   });
 });
 
+rides.get('/count/per_year', (req, res) => {
+  const SQL =
+    `SELECT extract(year from start_time) as year,
+     COUNT(*) as count
+     FROM rides
+     GROUP BY year
+     ORDER BY year;`
+  pool.query(SQL, (err, results) => {
+    res.send(Transformer.count_by_year(results.rows));
+  });
+});
+
 rides.get('/count/per_hour', (req, res) => {
   const SQL =
     `SELECT date_part('hour', start_time) as hour, COUNT(*) as count
