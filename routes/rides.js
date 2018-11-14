@@ -28,7 +28,7 @@ rides.get('/count/per_month', (req, res) => {
      GROUP BY year, month
      ORDER BY year, month;`;
   pool.query(SQL, (err, results) => {
-    res.send(Transformer.count_by_year_and_month(results.rows));
+    res.send(Transformer.countByYearAndMonth(results.rows));
   });
 });
 
@@ -40,7 +40,7 @@ rides.get('/count/per_year', (req, res) => {
      GROUP BY year
      ORDER BY year;`
   pool.query(SQL, (err, results) => {
-    res.send(Transformer.count_by_year(results.rows));
+    res.send(Transformer.countByYear(results.rows));
   });
 });
 
@@ -51,7 +51,7 @@ rides.get('/count/per_hour', (req, res) => {
      GROUP BY date_part('hour', start_time)
      ORDER BY hour`;
   pool.query(SQL, (err, results) => {
-    res.send(Transformer.count_by_hour(results.rows));
+    res.send(Transformer.countByHour(results.rows));
   });
 });
 
