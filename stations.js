@@ -28,7 +28,7 @@ const STATIONS = {
     longitudeRange: {min: -121.333995, max: -121.333355}
   },
   'ten_barrel': {
-    latitudeRange: { min: 44.060185, max: 44.060645},
+    latitudeRange: {min: 44.060185, max: 44.060645},
     longitudeRange: {min: -121.313305 , max: -121.312665}
   }
 }

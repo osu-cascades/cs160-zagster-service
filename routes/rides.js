@@ -1,5 +1,4 @@
-const express = require('express');
-const rides = express.Router();
+const rides = require('express').Router();
 
 const { Pool } = require('pg');
 const DATABASE_URL = process.env.DATABASE_URL || 'UNDEFINED';
