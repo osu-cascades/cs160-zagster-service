@@ -58,8 +58,8 @@ rides.get('/count/per_hour', (req, res) => {
 rides.get('/count/:station', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   const {
-    latitude_range: {min: minLat, max: maxLat},
-    longitude_range: {min: minLon, max: maxLon}
+    latitudeRange: {min: minLat, max: maxLat},
+    longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
   const SQL =
     `SELECT COUNT(*) FROM rides
@@ -72,8 +72,8 @@ rides.get('/count/:station', (req, res) => {
 rides.get('/count/:station/per_month', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   const {
-    latitude_range: {min: minLat, max: maxLat},
-    longitude_range: {min: minLon, max: maxLon}
+    latitudeRange: {min: minLat, max: maxLat},
+    longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
 
   res.send(`TODO ${req.params.station}`);
@@ -82,8 +82,8 @@ rides.get('/count/:station/per_month', (req, res) => {
 rides.get('/count/:station/per_day', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   const {
-    latitude_range: {min: minLat, max: maxLat},
-    longitude_range: {min: minLon, max: maxLon}
+    latitudeRange: {min: minLat, max: maxLat},
+    longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
 
   res.send(`TODO ${req.params.station}`);
