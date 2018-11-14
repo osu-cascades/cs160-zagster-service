@@ -55,8 +55,12 @@ rides.get('/count/per_hour', (req, res) => {
   });
 });
 
-rides.get('/count/:station', (req, res) => {
+rides.get('/count/(:station)(/*)?', (req, res, next) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
+  else next();
+});
+
+rides.get('/count/:station', (req, res) => {
   const {
     latitudeRange: {min: minLat, max: maxLat},
     longitudeRange: {min: minLon, max: maxLon}
@@ -70,7 +74,6 @@ rides.get('/count/:station', (req, res) => {
 });
 
 rides.get('/count/:station/per_month', (req, res) => {
-  if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   const {
     latitudeRange: {min: minLat, max: maxLat},
     longitudeRange: {min: minLon, max: maxLon}
@@ -80,7 +83,6 @@ rides.get('/count/:station/per_month', (req, res) => {
 });
 
 rides.get('/count/:station/per_day', (req, res) => {
-  if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   const {
     latitudeRange: {min: minLat, max: maxLat},
     longitudeRange: {min: minLon, max: maxLon}
