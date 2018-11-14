@@ -57,28 +57,34 @@ rides.get('/count/per_hour', (req, res) => {
 
 rides.get('/count/:station', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
-  const lat_range = STATIONS[req.params.station].latitude_range;
-  const lon_range = STATIONS[req.params.station].longitude_range;
+  const {
+    latitude_range: {min: minLat, max: maxLat},
+    longitude_range: {min: minLon, max: maxLon}
+  } = STATIONS[req.params.station];
   const SQL =
     `SELECT COUNT(*) FROM rides
      WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4`;
-  pool.query(SQL, [lat_range.min, lat_range.max, lon_range.min, lon_range.max], (err, results) => {
+  pool.query(SQL, [minLat, maxLat, minLon, maxLon], (err, results) => {
     res.send(results.rows[0]);
   });
 });
 
 rides.get('/count/:station/per_month', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
-  const latitude_range = STATIONS[req.params.station].latitude_range;
-  const longitude_range = STATIONS[req.params.station].longitude_range;
+  const {
+    latitude_range: {min: minLat, max: maxLat},
+    longitude_range: {min: minLon, max: maxLon}
+  } = STATIONS[req.params.station];
 
   res.send(`TODO ${req.params.station}`);
 });
 
 rides.get('/count/:station/per_day', (req, res) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
-  const latitude_range = STATIONS[req.params.station].latitude_range;
-  const longitude_range = STATIONS[req.params.station].longitude_range;
+  const {
+    latitude_range: {min: minLat, max: maxLat},
+    longitude_range: {min: minLon, max: maxLon}
+  } = STATIONS[req.params.station];
 
   res.send(`TODO ${req.params.station}`);
 });
