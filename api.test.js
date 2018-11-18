@@ -13,7 +13,8 @@ describe('API endpoints', () => {
     '/rides/count/per_hour',
     '/rides/count/g5',
     '/rides/count/g5/per_month',
-    '/rides/count/g5/per_day'
+    '/rides/count/g5/per_day',
+    '/rides/count/g5/per_day_of_year'
   ]
 
   ENDPOINTS.forEach( endpoint => {
