@@ -5,6 +5,24 @@ test('Transformer exists', () => {
   new Transformer()
 });
 
+test('countByYearAndDayOfYear', () => {
+  const rows =
+    [{'year':2001,'day':1,'count':'20011'},
+     {'year':2001,'day':2,'count':'20012'},
+     {'year':2001,'day':4,'count':'20014'},
+     {'year':2001,'day':7,'count':'20017'},
+     {'year':2002,'day':1,'count':'20021'},
+     {'year':2002,'day':3,'count':'20023'},
+     {'year':2003,'day':7,'count':'20037'},
+     {'year':null,'day':null,'count':'100'}];
+  const expected_result =
+    {2001: {1:20011,2:20012,4:20014,7:20017},
+     2002: {1:20021, 3:20023},
+     2003: {7:20037}};
+  expect(Transformer.countByYearAndDayOfYear(rows)).toEqual(expected_result);
+})
+
+
 test('countByYearAndMonthAndDay', () => {
   const rows =
     [{'year':2001,'month':1,'day':1,'count':'200111'},

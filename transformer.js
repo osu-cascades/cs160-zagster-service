@@ -6,6 +6,23 @@ class Transformer {
   constructor() {}
 
   // {
+  //   2001: {1: 300, 2: 900, 6: 700, ... 365: 543},
+  //   2002: {1: 30, 5: 90, 7: 88, ... 365: 21}
+  // }
+  static countByYearAndDayOfYear(rows) {
+    let result = {};
+    rows.map(row => {
+      const { year, day, count } = row;
+      if (year) {
+        if (result[year] === undefined) result[year] = {};
+        result[year][day] = parseInt(count);
+      }
+    });
+    return result;
+  }
+
+
+  // {
   //   2001: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} },
   //   2002: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} }
   // }
