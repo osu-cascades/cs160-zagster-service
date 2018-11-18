@@ -22,7 +22,6 @@ test('countByYearAndDayOfYear', () => {
   expect(Transformer.countByYearAndDayOfYear(rows)).toEqual(expected_result);
 })
 
-
 test('countByYearAndMonthAndDay', () => {
   const rows =
     [{'year':2001,'month':1,'day':1,'count':'200111'},

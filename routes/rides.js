@@ -95,7 +95,6 @@ rides.get('/count/:station/per_day', (req, res) => {
     latitudeRange: {min: minLat, max: maxLat},
     longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
-
   const SQL =
     `SELECT extract(year from start_time) as year,
      extract(month from start_time) as month,
@@ -115,7 +114,6 @@ rides.get('/count/:station/per_day_of_year', (req, res) => {
     latitudeRange: {min: minLat, max: maxLat},
     longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
-
   const SQL =
     `SELECT extract(year from start_time) as year,
      extract(doy from start_time) as day,
@@ -128,5 +126,23 @@ rides.get('/count/:station/per_day_of_year', (req, res) => {
     res.send(Transformer.countByYearAndDayOfYear(results.rows));
   });
 });
+
+rides.get('/count/:station/per_year', (req, res) => {
+  const {
+    latitudeRange: {min: minLat, max: maxLat},
+    longitudeRange: {min: minLon, max: maxLon}
+  } = STATIONS[req.params.station];
+  const SQL =
+    `SELECT extract(year from start_time) as year,
+     COUNT(*) as count
+     FROM rides
+     WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4
+     GROUP BY year
+     ORDER BY year;`;
+  pool.query(SQL, [minLat, maxLat, minLon, maxLon], (err, results) => {
+    res.send(Transformer.countByYear(results.rows));
+  });
+});
+
 
 module.exports = rides;
