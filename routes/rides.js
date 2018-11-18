@@ -96,7 +96,18 @@ rides.get('/count/:station/per_day', (req, res) => {
     longitudeRange: {min: minLon, max: maxLon}
   } = STATIONS[req.params.station];
 
-  res.send(`TODO ${req.params.station}`);
+  const SQL =
+    `SELECT extract(year from start_time) as year,
+     extract(month from start_time) as month,
+     extract(day from start_time) as day,
+     COUNT(*) as count
+     FROM rides
+     WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4
+     GROUP BY year, month, day
+     ORDER BY year, month, day;`;
+  pool.query(SQL, [minLat, maxLat, minLon, maxLon], (err, results) => {
+    res.send(Transformer.countByYearAndMonthAndDay(results.rows));
+  });
 });
 
 module.exports = rides;
