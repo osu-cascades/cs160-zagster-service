@@ -88,7 +88,12 @@ class Transformer {
     return result;
   }
 
-  // { p0: 17, p2: 23, ... pN: 701 }
+  /**
+   * Transforms a rowset of grouped counts like this:
+   * [ {'year':y1, 'count':'429'}, {'year':y2,'count':'231'}, ... ]
+   * into this:
+   * {y1: 17, y2: 23, ... yN: 701}
+   */
   static countByPeriod(rows, periodName) {
     let result = {};
     rows.forEach(row => {
