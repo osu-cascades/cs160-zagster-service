@@ -6,8 +6,8 @@ class Transformer {
   constructor() {}
 
   // {
-  //   2001: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} },
-  //   2002: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} }
+  //   2001: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} },
+  //   2002: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} }
   // }
   static countMembershipsByYearAndMonth(rows) {
     let result = {};
