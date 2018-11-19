@@ -6,6 +6,24 @@ class Transformer {
   constructor() {}
 
   // {
+  //   2001: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} },
+  //   2002: {1: {1: 300, 2: 900, 31: 700}, 2: {1: 300, 2: 900, ... 31: 700} }
+  // }
+  static countMembershipsByYearAndMonth(rows) {
+    let result = {};
+    rows.map(row => {
+      const { year, month, membership, count } = row;
+      if (year) {
+        if (result[year] === undefined) result[year] = {};
+        if (result[year][month] === undefined) result[year][month] = {}
+        result[year][month][membership] = parseInt(count);
+      }
+    });
+    return result;
+  }
+
+
+  // {
   //   2001: {1: 300, 2: 900, 6: 700, ... 365: 543},
   //   2002: {1: 30, 5: 90, 7: 88, ... 365: 21}
   // }
