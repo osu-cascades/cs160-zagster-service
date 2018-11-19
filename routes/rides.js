@@ -39,7 +39,7 @@ rides.get('/count/per_year', (req, res) => {
      GROUP BY year
      ORDER BY year;`
   pool.query(SQL, (err, results) => {
-    res.send(Transformer.countByYear(results.rows));
+    res.send(Transformer.countByPeriod(results.rows, 'year'));
   });
 });
 
@@ -50,7 +50,7 @@ rides.get('/count/per_hour', (req, res) => {
      GROUP BY date_part('hour', start_time)
      ORDER BY hour`;
   pool.query(SQL, (err, results) => {
-    res.send(Transformer.countByHour(results.rows));
+    res.send(Transformer.countByPeriod(results.rows, 'hour'));
   });
 });
 
@@ -140,7 +140,7 @@ rides.get('/count/:station/per_year', (req, res) => {
      GROUP BY year
      ORDER BY year;`;
   pool.query(SQL, [minLat, maxLat, minLon, maxLon], (err, results) => {
-    res.send(Transformer.countByYear(results.rows));
+    res.send(Transformer.countByPeriod(results.rows, 'year'));
   });
 });
 

@@ -88,20 +88,11 @@ class Transformer {
     return result;
   }
 
-  // {2001:20011, 2002:20021, 2003:20037};
-  static countByYear(rows) {
+  // { p0: 17, p2: 23, ... pN: 701 }
+  static countByPeriod(rows, periodName) {
     let result = {};
     rows.forEach(row => {
-      if (row.year != null) result[row.year] = parseInt(row.count);
-    });
-    return result;
-  }
-
-  // { 0: 12, 1: 24, ... 23: 788 }
-  static countByHour(rows) {
-    let result = {};
-    rows.forEach(row => {
-      if (row.hour != null) result[row.hour] = parseInt(row.count);
+      if (row[periodName] != null) result[row[periodName]] = parseInt(row.count);
     });
     return result;
   }

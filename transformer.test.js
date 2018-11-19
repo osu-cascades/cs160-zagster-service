@@ -86,23 +86,13 @@ test('countByYearAndMonth', () => {
   expect(Transformer.countByYearAndMonth(rows)).toEqual(expected_result);
 });
 
-test('countByYear', () => {
+test('countByPeriod', () => {
   const rows =
-    [{'year':2001,'count':'20011'},
-     {'year':2002,'count':'20021'},
-     {'year':2003,'count':'20037'},
-     {'year':null,'count':'100'}];
-  const expected_result =
-    {2001:20011, 2002:20021, 2003:20037};
-  expect(Transformer.countByYear(rows)).toEqual(expected_result);
+    [{'fake':0,'count':'429'},
+     {'fake':1,'count':'231'},
+     {'fake':23,'count':'710'},
+     {'fake':null,'count':'183'}];
+  const expected_result = {'0': 429, '1':231, '23':710};
+  expect(Transformer.countByPeriod(rows, 'fake')).toEqual(expected_result);
 });
 
-test('countByHour', () => {
-  const rows =
-    [{'hour':0,'count':'429'},
-     {'hour':1,'count':'231'},
-     {'hour':23,'count':'710'},
-     {'hour':null,'count':'183'}];
-  const expected_result = {'0': 429, '1':231, '23':710};
-  expect(Transformer.countByHour(rows)).toEqual(expected_result);
-});
