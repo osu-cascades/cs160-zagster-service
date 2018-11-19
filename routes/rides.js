@@ -54,6 +54,31 @@ rides.get('/count/per_hour', (req, res) => {
   });
 });
 
+rides.get('/count/from/:start/to/:end', (req, res) => {
+  if (STATIONS[req.params.start] === undefined || STATIONS[req.params.end] === undefined) {
+    res.sendStatus(404); return;
+  }
+  const {
+    latitudeRange: {min: startMinLat, max: startMaxLat},
+    longitudeRange: {min: startMinLon, max: startMaxLon}
+  } = STATIONS[req.params.start];
+  const {
+    latitudeRange: {min: endMinLat, max: endMaxLat},
+    longitudeRange: {min: endMinLon, max: endMaxLon}
+  } = STATIONS[req.params.end];
+  const SQL =
+    `SELECT COUNT(*)
+     FROM rides
+     WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4
+     AND end_lat > $5 AND end_lat < $6 AND end_lon > $7 AND end_lon < $8;`;
+  pool.query(
+    SQL,
+    [startMinLat, startMaxLat, startMinLon, startMaxLon, endMinLat, endMaxLat, endMinLon, endMaxLon],
+    (err, results) => {
+      res.send(results.rows[0]);
+  });
+});
+
 rides.get('/count/(:station)(/*)?', (req, res, next) => {
   if (STATIONS[req.params.station] === undefined) { res.sendStatus(404); return; }
   else next();
@@ -179,7 +204,6 @@ rides.get('/count/:station/per_week/memberships', (req, res) => {
     res.send(Transformer.countMembershipsByYearAndWeek(results.rows));
   });
 });
-
 
 
 module.exports = rides;

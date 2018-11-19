@@ -11,6 +11,7 @@ describe('API endpoints', () => {
     '/rides/count/per_month',
     '/rides/count/per_year',
     '/rides/count/per_hour',
+    '/rides/count/from/g5/to/g5',
     '/rides/count/g5',
     '/rides/count/g5/per_month',
     '/rides/count/g5/per_day',
@@ -30,6 +31,9 @@ describe('API endpoints', () => {
   });
 
   const INVALID_ENDPOINTS = [
+    '/rides/count/from/FAKE/to/g5',
+    '/rides/count/from/g5/to/FAKE',
+    '/rides/count/from/FAKE/to/FAKE',
     '/rides/count/FAKE',
     '/rides/count/FAKE/per_month',
     '/rides/count/FAKE/per_day',
