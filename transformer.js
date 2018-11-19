@@ -9,6 +9,23 @@ class Transformer {
   //   2001: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} },
   //   2002: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} }
   // }
+  static countMembershipsByYearAndWeek(rows) {
+    let result = {};
+    rows.map(row => {
+      const { year, week, membership, count } = row;
+      if (year) {
+        if (result[year] === undefined) result[year] = {};
+        if (result[year][week] === undefined) result[year][week] = {}
+        result[year][week][membership] = parseInt(count);
+      }
+    });
+    return result;
+  }
+
+  // {
+  //   2001: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} },
+  //   2002: {1: {'Annual': 300, 'Monthly': 900, 'Hourly': 700}, 2: {'Annual': 300, 'Monthly': 900, ... 'Hourly': 700} }
+  // }
   static countMembershipsByYearAndMonth(rows) {
     let result = {};
     rows.map(row => {
@@ -21,7 +38,6 @@ class Transformer {
     });
     return result;
   }
-
 
   // {
   //   2001: {1: 300, 2: 900, 6: 700, ... 365: 543},

@@ -5,6 +5,23 @@ test('Transformer exists', () => {
   new Transformer()
 });
 
+test('countMembershipsByYearAndWeek', () => {
+  const rows =
+    [{'year':2001,'week':1,'membership':'Annual','count':'20011'},
+     {'year':2001,'week':1,'membership':'Student','count':'20011'},
+     {'year':2001,'week':2,'membership':'Hourly','count':'20012'},
+     {'year':2001,'week':2,'membership':'Pay-As-You-Go','count':'20012'},
+     {'year':2002,'week':1,'membership':'Annual','count':'20021'},
+     {'year':2002,'week':2,'membership':'Student','count':'20022'},
+     {'year':2003,'week':7,'membership':'Hourly','count':'20037'},
+     {'year':null,'week':null,'membership':null,'count':'100'}];
+  const expected_result =
+    {2001: {1: {'Annual':20011,'Student':20011}, 2: {'Hourly':20012,'Pay-As-You-Go':20012}},
+     2002: {1: {'Annual':20021}, 2: {'Student':20022}},
+     2003: {7: {'Hourly':20037}}};
+  expect(Transformer.countMembershipsByYearAndWeek(rows)).toEqual(expected_result);
+})
+
 test('countMembershipsByYearAndMonth', () => {
   const rows =
     [{'year':2001,'month':1,'membership':'Annual','count':'20011'},
@@ -21,7 +38,6 @@ test('countMembershipsByYearAndMonth', () => {
      2003: {7: {'Hourly':20037}}};
   expect(Transformer.countMembershipsByYearAndMonth(rows)).toEqual(expected_result);
 })
-
 
 test('countByYearAndDayOfYear', () => {
   const rows =

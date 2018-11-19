@@ -162,5 +162,24 @@ rides.get('/count/:station/per_month/memberships', (req, res) => {
   });
 });
 
+rides.get('/count/:station/per_week/memberships', (req, res) => {
+  const {
+    latitudeRange: {min: minLat, max: maxLat},
+    longitudeRange: {min: minLon, max: maxLon}
+  } = STATIONS[req.params.station];
+  const SQL =
+    `SELECT extract(year from start_time) as year,
+     extract(week from start_time) as week,
+     membership, COUNT(*)
+     FROM rides
+     WHERE start_lat > $1 AND start_lat < $2 AND start_lon > $3 AND start_lon < $4
+     GROUP BY year, week, membership
+     ORDER BY year, week, membership;`;
+  pool.query(SQL, [minLat, maxLat, minLon, maxLon], (err, results) => {
+    res.send(Transformer.countMembershipsByYearAndWeek(results.rows));
+  });
+});
+
+
 
 module.exports = rides;
