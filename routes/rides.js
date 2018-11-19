@@ -13,6 +13,13 @@ rides.get('/example', (req, res) => {
   pool.query(SQL, (err, results) => res.send(results.rows[0]));
 });
 
+rides.get('/locations_and_times', (req, res) => {
+  const SQL =
+    `SELECT rental_id, start_lat, start_lon, end_lat, end_lon, start_time, end_time
+     FROM rides;`;
+  pool.query(SQL, (err, results) => res.send(results.rows));
+})
+
 rides.get('/count', (req, res) => {
   const SQL = 'SELECT COUNT(*) FROM rides;';
   pool.query(SQL, (err, results) => res.send(results.rows[0]));

@@ -7,6 +7,7 @@ describe('API endpoints', () => {
 
   const ENDPOINTS = [
     '/rides/example',
+    '/rides/locations_and_times',
     '/rides/count',
     '/rides/count/per_month',
     '/rides/count/per_year',

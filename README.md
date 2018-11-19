@@ -11,6 +11,7 @@ by the paths listed here in the "Web Service API Endpoints" table.
 
 path|description|result
 ---|---|---
+[/rides/locations_and_times](https://zagster-service.herokuapp.com/rides/locations_and_times) |Rental id, start lat/lon and start/end time of all rides.| `{"rental_id":"xyz","start_lat":44.0,"start_lon":-121.3,"end_lat":44.0,"end_lon":-121.3,"start_time":"yyyymmddhhmm","end_time":"yyyymmddhhmm","membership":"annual"}`
 [/rides/count](https://zagster-service.herokuapp.com/rides/count) | Total number of rows in the _rides_ table.| `{"count":"8675309"}`
 [/rides/count/per_month](https://zagster-service.herokuapp.com/rides/count/per_month) | Number of rides per month, per year.| `{"2016":[{"9":220},{"10":141},{"11":89},{"12":16}],"2017":[{"1":20},{"2":31},{"3":79},{"4":88},{"5":156},{"6":301},{"7":405},{"8":187},{"9":401},{"10":353},{"11":113},{"12":79}],"2018":[{"1":94},{"2":83},{"3":154},{"4":1216},{"5":2400},{"6":1756},{"7":2748},{"8":1912},{"9":3648},{"10":2404}]}`
 [/rides/count/per_year](https://zagster-service.herokuapp.com/rides/count/per_year) | Number of rides per per year.| `{"2016":466,"2017":2213,"2018":16415}`
