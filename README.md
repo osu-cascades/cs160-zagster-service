@@ -27,7 +27,6 @@ path|description|result
 [/rides/example](https://zagster-service.herokuapp.com/rides/example) |A sample route to return one row of data.| `{"id":1,"user_id":"","rental_id":"","start_lat":44.0,"start_lon":-121.3,"end_lat":44.0,"end_lon":-121.3,"start_time":"","end_time":"","membership":""}`
 [/](https://zagster-service.herokuapp.com/)|A practice route.|I am listening!
 [/ice_cream](https://zagster-service.herokuapp.com/ice_cream)|A practice route.|_word or phrase_
-
 [/you_lazy](https://zagster-service.herokuapp.com/you_lazy)|A practice route.|_word or phrase_
 [/cs](https://zagster-service.herokuapp.com/cs)|A practice route.|_word or phrase_
 [/HELLO](https://zagster-service.herokuapp.com/HELLO)|A practice route.|_word or phrase_
@@ -54,9 +53,6 @@ path|description|result
 [/minecraft](https://zagster-service.herokuapp.com/minecraft)|A practice route.|_word or phrase_
 [/query](https://zagster-service.herokuapp.com/query)|A practice route.|_word or phrase_
 [/please_help](https://zagster-service.herokuapp.com/please_help)|A practice route.|_word or phrase_
-
-
-
 [/RKS](https://zagster-service.herokuapp.com/RKS)|A practice route.|_word or phrase_
 [/HemenwayThanksgiving](https://zagster-service.herokuapp.com/HemenwayThanksgiving)|A practice route.|_word or phrase_
 [/Cat_nya](https://zagster-service.herokuapp.com/Cat_nya)|A practice route.|_word or phrase_
